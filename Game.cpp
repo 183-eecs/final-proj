@@ -74,53 +74,54 @@ bool Game::isValidPickupList(const string& pickupList, const int pickupFloorNum)
 
     //check for duplicates
     for (i = 0; i < len - 1; i++) {
-    
+
         for (j = 0; j < len; j++) {
-        
+
             if (pickupList[i] == pickupList[j]) {
-            
+
                 return false;
-            
+
             }
-        
+
         }
+    }
 
     //check range in [0,9]
-    for (i = 0; i < len ; i++) {
-    
+    for (i = 0; i < len; i++) {
+
         int value = pickupList[i] - '0';
 
         if (value < 0 || value > 9) {
-        
+
             return false;
-        
+
         }
-    
+
     }
 
     //check if pickuplist exceeds elevator capacity
     if (len > ELEVATOR_CAPACITY) {
-    
+
         return false;
-    
+
     }
 
     //check if pickuplist 
     char temp = pickupList[0];
     for (i = 0; i < len; i++) {
-    
+
 
         if (pickupList[i] > temp) {
-        
+
             temp = pickupList[i];
-        
+
         }
-    
+
     }
     if (temp - '0' > building.getFloorByFloorNum(pickupFloorNum).getNumPeople()) {
-    
+
         return false;
-    
+
     }
 
     //direction = false means the elevator is going down
@@ -131,36 +132,37 @@ bool Game::isValidPickupList(const string& pickupList, const int pickupFloorNum)
 
     //get the direction of first person
     if (building.getFloorByFloorNum(pickupFloorNum).getPersonByIndex(firstPersonIndex).getTargetFloor() > pickupFloorNum) {
-    
-        direction = true;    
+
+        direction = true;
     }
 
     //get direction of other people
     bool directionFlag = false;
     for (i = 0; i < len; i++) {
-    
+
         if (building.getFloorByFloorNum(pickupFloorNum).getPersonByIndex(i).getTargetFloor() > pickupFloorNum) {
-        
+
             directionFlag = true;
-        
+
         }
         else {
-        
+
             directionFlag = false;
-        
+
         }
         //check direction of the others with the first person
         if (direction != directionFlag) {
-        
+
             return false;
-        
+
         }
 
-    
+
     }
 
     return true;
 
+ 
 }
 
 //////////////////////////////////////////////////////
