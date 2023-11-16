@@ -12,6 +12,7 @@
 
 
 #include "Floor.h"
+#include <algorithm>
 
 using namespace std;
 
@@ -25,6 +26,7 @@ int Floor::tick(int currentTime) {
             num_explo += 1;
         }
     }
+    
     removePeople(list, num_explo);
     
     return num_explo;
@@ -34,7 +36,6 @@ void Floor::addPerson(Person newPerson, int request) {
     if (numPeople < MAX_PEOPLE_PER_FLOOR){
         people[numPeople] = newPerson;
         numPeople += 1;
-        
     }
     if (request > 0){
         hasUpRequest = true;
@@ -46,9 +47,13 @@ void Floor::addPerson(Person newPerson, int request) {
 
 
 void Floor::removePeople(const int indicesToRemove[MAX_PEOPLE_PER_FLOOR], int  numPeopleToRemove) {
+    int copy[MAX_PEOPLE_PER_FLOOR]={};
     for (int i = 0; i < numPeopleToRemove; i++){
-        int index = indicesToRemove[i];
-        index -= i;
+        copy[i] = indicesToRemove[i];
+    }
+    sort(copy,copy+numPeopleToRemove);
+    for (int i = 0; i < numPeopleToRemove; i++){
+        int index = copy[i]-i;
         for (int num = index; num < numPeople - 1; num ++){
             people[num] = people[num + 1];
         }
