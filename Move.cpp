@@ -84,7 +84,7 @@ void Move::setPeopleToPickup(const string& pickupList, const int currentFloor, c
             totalSatisfaction += (MAX_ANGER - angerLevel);
             
             int personTargetFloor = 
-            pickupFloor.getPersonByIndex(index).getTartgetFloor();
+            pickupFloor.getPersonByIndex(index).getTargetFloor();
             int floorDistance = abs(currentFloor - personTargetFloor);
             if(floorDistance > maxFloorDistance){
                 maxFloorDistance = floorDistance;
