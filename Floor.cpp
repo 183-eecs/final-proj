@@ -20,12 +20,11 @@ int Floor::tick(int currentTime) {
     int list[MAX_PEOPLE_PER_FLOOR];
     
     for (int i = 0; i < numPeople; i++){
-        if (getPersonByIndex(i).tick(currentTime)){
+        if (people[i].tick(currentTime)){
             list[num_explo] = i;
             num_explo += 1;
         }
     }
-    
     removePeople(list, num_explo);
     
     return num_explo;
@@ -49,9 +48,7 @@ void Floor::addPerson(Person newPerson, int request) {
 void Floor::removePeople(const int indicesToRemove[MAX_PEOPLE_PER_FLOOR], int  numPeopleToRemove) {
     for (int i = 0; i < numPeopleToRemove; i++){
         int index = indicesToRemove[i];
-        if (i != 0){
-            index -= 1;
-        }
+        index -= i;
         for (int num = index; num < numPeople - 1; num ++){
             people[num] = people[num + 1];
         }
