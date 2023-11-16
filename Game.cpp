@@ -75,7 +75,7 @@ bool Game::isValidPickupList(const string& pickupList, const int pickupFloorNum)
     //check for duplicates
     for (i = 0; i < len - 1; i++) {
 
-        for (j = 0; j < len; j++) {
+        for (j = i+1; j < len; j++) {
 
             if (pickupList[i] == pickupList[j]) {
 
