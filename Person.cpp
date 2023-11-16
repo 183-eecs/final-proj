@@ -35,7 +35,7 @@ bool Person::tick(int currentTime) {
 }
 
 void Person::print(ostream &outs) {
-    outs << turn << 'f' << currentFloor << 't' << targetFloor << 'a' <<
+    outs << 'f' << currentFloor << 't' << targetFloor << 'a' <<
     angerLevel;
 }
 
