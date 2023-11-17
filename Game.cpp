@@ -118,7 +118,7 @@ bool Game::isValidPickupList(const string& pickupList, const int pickupFloorNum)
         }
 
     }
-    if (temp - '0' > building.getFloorByFloorNum(pickupFloorNum).getNumPeople()) {
+    if (temp - '0' >= building.getFloorByFloorNum(pickupFloorNum).getNumPeople()) {
 
         return false;
 
