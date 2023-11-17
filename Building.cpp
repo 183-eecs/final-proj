@@ -15,7 +15,14 @@
 using namespace std;
 
 void Building::spawnPerson(Person newPerson){
-    floors[newPerson.getCurrentFloor()].addPerson(newPerson, 1);
+    int request = 0;
+    if (newPerson.getCurrentFloor() > newPerson.getTargetFloor()) {
+        request = -1;
+    }
+    if (newPerson.getCurrentFloor() < newPerson.getTargetFloor()) {
+        request = 1;
+    }
+    floors[newPerson.getCurrentFloor()].addPerson(newPerson, request);
     return;
 }
 
@@ -26,10 +33,8 @@ void Building::update(Move move){
     else if (move.isPickupMove()) {
         int newList[MAX_PEOPLE_PER_FLOOR];
         move.copyListOfPeopleToPickup(newList);
-        floors[move.getTargetFloor()].removePeople(newList, move.getNumPeopleToPickup());
-        if (elevators[move.getElevatorId()].isServicing()) {
-            elevators[move.getElevatorId()].setCurrentFloor(move.getTargetFloor());
-        }
+        floors[elevators[move.getElevatorId()].getCurrentFloor()].removePeople(newList, move.getNumPeopleToPickup());
+        elevators[move.getElevatorId()].serviceRequest(move.getTargetFloor());
         return;
     }
 }
@@ -42,7 +47,7 @@ int Building::tick(Move move){
         elevators[i].tick(time);
     }
     for (int j = 0; j < NUM_FLOORS; j++) {
-        floors[j].tick(time);
+        total += floors[j].tick(time);;
     }
     return total;
 }
