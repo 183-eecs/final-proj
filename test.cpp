@@ -89,24 +89,32 @@ void elevator_tests() {
 }
 
 void floor_tests(){
-    Person p1("0f8t5a5");
-    Person p2("0f2t5a10");
-    Person p3("0f6t5a5");
-    Person p4("0f3t7a11");
-    Person p5("0f7t8a5");
+    Person p1("0f2t5a10");
+    Person p2("0f3t7a12");
+    Person p3("0f8t5a5");
+    Person p4("0f6t5a5");
+    Person p5("0f3t7a11");
+    Person p6("0f7t8a5");
+
     Floor flr;
     
-    flr.addPerson(p1, p1.getTargetFloor()-p1.getCurrentFloor());
-    flr.addPerson(p2, p2.getTargetFloor()-p2.getCurrentFloor());
+    flr.addPerson(p1, p1.getTargetFloor()-p1.getCurrentFloor());//
+    flr.addPerson(p2, p2.getTargetFloor()-p2.getCurrentFloor());//
     flr.addPerson(p3, p3.getTargetFloor()-p3.getCurrentFloor());
     flr.addPerson(p4, p4.getTargetFloor()-p4.getCurrentFloor());
-    flr.addPerson(p5, p5.getTargetFloor()-p5.getCurrentFloor());
+    flr.addPerson(p5, p5.getTargetFloor()-p5.getCurrentFloor());//
+    flr.addPerson(p6, p6.getTargetFloor()-p6.getCurrentFloor());//
+   
     
+    const int list[4]={5,1,0,4};
+    flr.removePeople(list,4);
+    for (int i=0;i<flr.getNumPeople();i++){
+        cout<< flr.getPersonByIndex(i)<<endl;
+    }
     
-    cout << flr.tick(0) << endl;
-    cout << flr.getNumPeople() << endl;
-    cout << flr.getHasUpRequest() << endl;
-    cout << flr.getHasDownRequest() << endl;
-    
+    flr.tick(0);
+    for (int i=0;i<flr.getNumPeople();i++){
+        cout<< flr.getPersonByIndex(i)<<endl;
+    }
     
 }
