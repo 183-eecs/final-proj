@@ -37,6 +37,9 @@ void Building::update(Move move){
         elevators[move.getElevatorId()].serviceRequest(move.getTargetFloor());
         return;
     }
+    else {
+        elevators[move.getElevatorId()].serviceRequest(move.getTargetFloor());
+    }
 }
 
 int Building::tick(Move move){
