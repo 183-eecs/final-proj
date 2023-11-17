@@ -47,7 +47,7 @@ int Building::tick(Move move){
         elevators[i].tick(time);
     }
     for (int j = 0; j < NUM_FLOORS; j++) {
-        total += floors[j].tick(time);;
+        total += floors[j].tick(time);
     }
     return total;
 }
