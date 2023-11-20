@@ -106,7 +106,7 @@ bool Game::isValidPickupList(const string& pickupList, const int pickupFloorNum)
 
     }
 
-    //check if pickuplist 
+    //check if pickuplist index is larger than number of people on the pickup floor
     char temp = pickupList[0];
     for (i = 0; i < len; i++) {
 
@@ -118,7 +118,7 @@ bool Game::isValidPickupList(const string& pickupList, const int pickupFloorNum)
         }
 
     }
-    if (temp - '0' >= building.getFloorByFloorNum(pickupFloorNum).getNumPeople()) {
+    if ((temp - '0') >= building.getFloorByFloorNum(pickupFloorNum).getNumPeople()) {
 
         return false;
 
@@ -140,7 +140,7 @@ bool Game::isValidPickupList(const string& pickupList, const int pickupFloorNum)
     bool directionFlag = false;
     for (i = 0; i < len; i++) {
 
-        if (building.getFloorByFloorNum(pickupFloorNum).getPersonByIndex(i).getTargetFloor() > pickupFloorNum) {
+        if (building.getFloorByFloorNum(pickupFloorNum).getPersonByIndex(pickupList[i] - '0').getTargetFloor() > pickupFloorNum) {
 
             directionFlag = true;
 
