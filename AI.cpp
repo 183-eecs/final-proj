@@ -63,7 +63,7 @@ string getAIPickupList(const Move& move, const BuildingState& buildingState,
 
     if (numDown != 0) {
 
-        angerBeforeExplodeDown = (angerBeforeExplodeDown * 1.0) / numUp;
+        angerBeforeExplodeDown = (angerBeforeExplodeDown * 1.0) / numDown;
 
     }
 
